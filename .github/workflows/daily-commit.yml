@@ -2,7 +2,7 @@ name: Daily Commit
 
 on:
   schedule:
-    # Runs daily at 07:30 UTC (change as needed)
+    # Runs daily at 07:30 UTC (adjust as needed)
     - cron: "30 7 * * *"
   workflow_dispatch:  # Allow manual trigger
 
