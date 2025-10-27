@@ -2,25 +2,30 @@ name: 21f3001224@ds.study.iitm.ac.in
 
 on:
   schedule:
-    # Runs daily at 07:30 UTC (adjust as needed)
-    - cron: "30 7 * * *"
-  workflow_dispatch:  # Allow manual trigger
+    - cron: "0 18 * * *" # runs every day at 18:00 UTC
+  workflow_dispatch:
 
 jobs:
-  commit:
+  auto-commit:
+    name: Auto Commit by 21f3001224@ds.study.iitm.ac.in
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
-      - name: Add a commit (email:21f3001224@ds.study.iitm.ac.in)
+      - name: "Update log - 21f3001224@ds.study.iitm.ac.in"
         run: |
-          git config --local user.email "21f3001224@ds.study.iitm.ac.in"
-          git config --local user.name "GitHub Actions Bot"
-          echo "Daily update $(date)" >> daily_update.txt
-          git add daily_update.txt
-          git commit -m "Automated daily commit [skip ci]" || exit 0
-          git push
+          echo "Automated update on $(date)" >> daily-log.txt
+
+      - name: Commit files
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "21f3001224@ds.study.iitm.ac.in"
+          git add .
+          git commit -m "Daily automated commit - $(date)" || echo "No changes to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
