@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Add a commit (email: 21f3001224@ds.study.iitm.ac.in)
+      - name: Add a commit (email:21f3001224@ds.study.iitm.ac.in)
         run: |
           git config --local user.email "21f3001224@ds.study.iitm.ac.in"
           git config --local user.name "GitHub Actions Bot"
